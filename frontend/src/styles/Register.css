@@ -1,0 +1,135 @@
+/* :root for theme colors */
+:root {
+  --primary-color: #d500f9;
+  --primary-hover: #aa00ff;
+  --accent-color: #880e4f;
+  --bg-light: #fce4ec;
+  --bg-lighter: #f3e5f5;
+  --form-bg: rgba(255, 255, 255, 0.85);
+}
+
+/* Center container */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  /* background is now applied inline in React */
+}
+
+/* Registration Form */
+.auth-form {
+  background-color: var(--form-bg);
+  padding: 2rem 2.5rem;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(136, 14, 79, 0.3);
+  width: 360px;
+  text-align: center;
+  backdrop-filter: blur(10px); /* Slight blur for glass effect */
+}
+
+/* Form Heading */
+.auth-form h2 {
+  margin-bottom: 1.5rem;
+  color: var(--accent-color);
+  font-size: 2rem;
+}
+
+/* Labels */
+.auth-form label {
+  display: block;
+  text-align: left;
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Input fields & dropdown */
+.auth-form input,
+.auth-form select {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 2px solid var(--primary-color);
+  border-radius: 50px;
+  outline: none;
+  transition: border 0.2s;
+  font-size: 1rem;
+}
+
+.auth-form input:focus,
+.auth-form select:focus {
+  border-color: var(--primary-hover);
+}
+
+/* Password field with eye icon */
+.password-field {
+  position: relative;
+}
+
+.password-field input {
+  padding-right: 2.5rem;
+}
+
+.password-field span {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* Password helper text */
+.auth-form small {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--accent-color);
+}
+
+/* Register Button */
+.auth-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 50px;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.auth-btn:hover {
+  background-color: var(--primary-hover);
+  transform: scale(1.02);
+}
+
+/* Link and paragraph */
+.auth-form p {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.auth-form .link {
+  color: var(--primary-color);
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.auth-form .link:hover {
+  text-decoration: underline;
+}
+
+/* Mobile Responsive */
+@media (max-width: 400px) {
+  .auth-form {
+    width: 90%;
+    padding: 1.5rem;
+  }
+}

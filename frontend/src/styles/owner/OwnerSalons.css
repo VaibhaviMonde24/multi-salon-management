@@ -1,0 +1,173 @@
+/* src/styles/owner/OwnerSalons.css */
+
+/* Container */
+.owner-salons {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+}
+
+/* Headings */
+h2, h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Salon Form */
+.salon-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f7f7f7;
+}
+
+/* Form Rows (Two fields per row) */
+.form-row {
+  display: flex;
+  gap: 10px;
+}
+
+.salon-form input,
+.salon-form textarea {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.salon-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Checkbox Label */
+.salon-form label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+}
+
+/* Submit Button */
+.salon-form button {
+  padding: 12px;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.salon-form button:hover {
+  background-color: #4338ca;
+}
+
+/* Existing Salons List */
+.salon-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Each Salon Card */
+.salon-item {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: box-shadow 0.2s ease;
+}
+
+.salon-item:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Salon Logo */
+.salon-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* Salon Info */
+.salon-info {
+  flex: 1;
+}
+
+.salon-info h4 {
+  margin: 0 0 5px 0;
+  font-size: 18px;
+  color: #111;
+}
+
+.salon-info p {
+  margin: 2px 0;
+  color: #555;
+  font-size: 14px;
+}
+
+/* Action Buttons */
+.salon-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.salon-actions button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.salon-actions button:first-child {
+  background-color: #fbbf24;
+  color: white;
+}
+
+.salon-actions button:first-child:hover {
+  background-color: #f59e0b;
+}
+
+.salon-actions button:last-child {
+  background-color: #ef4444;
+  color: white;
+}
+
+.salon-actions button:last-child:hover {
+  background-color: #b91c1c;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  .salon-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .salon-logo {
+    width: 80px;
+    height: 80px;
+  }
+}

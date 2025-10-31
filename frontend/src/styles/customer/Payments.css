@@ -1,0 +1,118 @@
+.payments-page {
+  font-family: 'Arial', sans-serif;
+  color: #fff;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.tabs button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.tabs button.active,
+.tabs button:hover {
+  background: #ff4081;
+}
+
+/* Table */
+.appointments-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255,255,255,0.9);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  margin-bottom: 30px;
+  color: #000;
+}
+
+.appointments-table th,
+.appointments-table td {
+  padding: 12px 16px;
+  text-align: center;
+}
+
+.appointments-table th {
+  background-color: #34495e;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.appointments-table tr:nth-child(even) {
+  background: rgba(245,245,245,0.7);
+}
+
+.appointments-table tr:hover {
+  background: rgba(52,152,219,0.15);
+  transition: background 0.3s ease;
+}
+
+/* Buttons */
+.appointments-table button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #3498db;
+  color: #fff;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.appointments-table button:hover {
+  background-color: #217dbb;
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .appointments-table,
+  .appointments-table thead,
+  .appointments-table tbody,
+  .appointments-table th,
+  .appointments-table td,
+  .appointments-table tr {
+    display: block;
+    width: 100%;
+  }
+
+  .appointments-table thead {
+    display: none;
+  }
+
+  .appointments-table tr {
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.95);
+    padding: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  .appointments-table td {
+    padding: 8px 10px;
+    text-align: right;
+    position: relative;
+    font-size: 0.9rem;
+  }
+
+  .appointments-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    font-weight: bold;
+    color: #444;
+    text-align: left;
+  }
+}

@@ -1,0 +1,121 @@
+.reviews-main {
+  padding: 40px;
+  font-family: 'Arial', sans-serif;
+  background: #fafafa;
+}
+
+/* Add/Edit form */
+.review-form {
+  margin-bottom: 30px;
+  background: linear-gradient(145deg, #f8bbd0, #f06292);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(136,14,79,0.2);
+  color: white;
+}
+
+.review-form h3 {
+  margin-bottom: 15px;
+}
+
+.review-form label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.review-form select,
+.review-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 10px;
+  border: none;
+  resize: vertical;
+}
+
+.review-form button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: none;
+  background: #ff4081;
+  color: white;
+  cursor: pointer;
+}
+
+.review-form button:hover {
+  background: #e73370;
+}
+
+.review-form button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Cancel button */
+.cancel-btn {
+  background: #757575;
+  color: white;
+  margin-left: 10px;
+}
+
+.cancel-btn:hover {
+  background: #5e5e5e;
+}
+
+/* Reviews Grid */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* Individual Review Card */
+.review-card {
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(136,14,79,0.1);
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(136,14,79,0.15);
+}
+
+.review-card-buttons {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.delete-btn {
+  background: #ff1744;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #d50000;
+}
+
+/* Edited Label as Badge */
+.edited-label {
+  background-color: #f8bbd0;
+  color: #880e4f;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  display: inline-block;
+  margin-top: 5px;
+  font-style: normal;
+}
+
+/* Review Date */
+.review-date {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 5px;
+}

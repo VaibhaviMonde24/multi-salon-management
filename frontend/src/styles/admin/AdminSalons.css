@@ -1,0 +1,78 @@
+/* Admin Salons Page Styles */
+.admin-dashboard .main-content h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #4527a0;
+}
+
+.salons-table-container {
+  overflow-x: auto;
+}
+
+.salons-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(92, 107, 192, 0.2);
+}
+
+.salons-table th,
+.salons-table td {
+  padding: 15px 12px;
+  text-align: left;
+}
+
+.salons-table th {
+  background: #5c6bc0;
+  color: #fff;
+  font-weight: 600;
+}
+
+.salons-table tr:nth-child(even) {
+  background: #f3f3f9;
+}
+
+.salons-table tr:hover {
+  background: #e1e1f5;
+}
+
+.salons-table .actions {
+  display: flex;
+  gap: 10px;
+}
+
+.salons-table .actions button {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.salons-table .actions button:hover {
+  transform: translateY(-2px);
+}
+
+.salons-table .actions button.reject {
+  background: #d32f2f;
+  color: #fff;
+}
+
+.salons-table .actions button.reject:hover {
+  background: #b71c1c;
+}
+
+.salons-table .actions button:not(.reject) {
+  background: #4527a0;
+  color: #fff;
+}
+
+.salons-table .actions button:not(.reject):hover {
+  background: #311b92;
+}

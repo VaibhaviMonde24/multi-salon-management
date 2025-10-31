@@ -1,0 +1,45 @@
+.owner-inventory {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.inventory-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.inventory-form input {
+  padding: 8px;
+  flex: 1;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.inventory-form button {
+  padding: 8px 15px;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.inventory-form button:hover {
+  background-color: #0056b3;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+table th {
+  background-color: #f2f2f2;
+}

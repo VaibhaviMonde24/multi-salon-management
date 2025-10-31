@@ -1,0 +1,94 @@
+/* General Contact Page */
+.contact-page {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(to bottom right, #fce4ec, #f3e5f5);
+  min-height: 100vh;
+  padding: 50px 20px;
+  text-align: center; /* ensures heading and content are centered */
+}
+
+/* Heading */
+.contact-page h2 {
+  color: #880e4f;
+  margin-bottom: 30px;
+  font-size: 2.2rem;
+}
+
+/* Contact Form */
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto; /* center the form */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(136, 14, 79, 0.2);
+  text-align: left; /* keep labels/inputs left-aligned inside form */
+}
+
+/* Inputs and textarea */
+.contact-form input,
+.contact-form textarea {
+  width: 100%; /* full width */
+  padding: 15px;
+  border-radius: 12px;
+  border: 2px solid #d500f9;
+  outline: none;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #880e4f;
+}
+
+/* Submit Button */
+.contact-form button {
+  padding: 15px;
+  border-radius: 50px;
+  border: none;
+  background: linear-gradient(90deg, #f48fb1, #ce93d8);
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.contact-form button:hover {
+  background: linear-gradient(90deg, #ce93d8, #f48fb1);
+  transform: scale(1.05);
+}
+
+/* Optional Info Section */
+.contact-info {
+  max-width: 600px;
+  margin: 40px auto 0;
+  color: #880e4f;
+}
+
+.contact-info p {
+  margin: 10px 0;
+  font-size: 1.05rem;
+}
+
+/* Footer */
+.contact-footer {
+  text-align: center;
+  padding: 20px;
+  background: #880e4f;
+  color: white;
+  font-size: 0.95rem;
+  margin-top: 50px;
+}
+
+.contact-footer .social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}

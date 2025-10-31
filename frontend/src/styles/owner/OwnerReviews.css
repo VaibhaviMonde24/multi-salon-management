@@ -1,0 +1,103 @@
+/* File: src/styles/owner/OwnerReviews.css */
+
+/* General page styling */
+.owner-reviews {
+  padding: 40px;
+  font-family: 'Arial', sans-serif;
+  background: #f0f0f0;
+  min-height: 100vh;
+}
+
+.owner-reviews h1 {
+  font-size: 32px;
+  color: #00796b;
+  margin-bottom: 25px;
+}
+
+/* Error message */
+.owner-reviews .error {
+  color: red;
+  margin-bottom: 15px;
+}
+
+/* Salon dropdown */
+#salon-select {
+  width: 250px;
+  padding: 10px 12px;
+  margin-bottom: 25px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+#salon-select:focus {
+  border-color: #26a69a;
+  box-shadow: 0 0 5px rgba(38, 166, 154, 0.5);
+}
+
+/* Reviews list */
+.reviews-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* Individual review card */
+.review-card {
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Review header */
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.review-header h3 {
+  font-size: 18px;
+  color: #00796b;
+  margin: 0;
+}
+
+.review-header .rating {
+  display: flex;
+  gap: 3px;
+}
+
+/* Review comment */
+.review-comment {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Review date */
+.review-date {
+  font-size: 14px;
+  color: #777;
+  text-align: right;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .owner-reviews {
+    padding: 20px;
+  }
+
+  #salon-select {
+    width: 100%;
+  }
+}

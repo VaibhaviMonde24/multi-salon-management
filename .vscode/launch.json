@@ -1,0 +1,43 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    
+
+    {
+      "name": "Run Backend Server",
+      "type": "pwa-node",
+      "request": "launch",
+      "program": "${workspaceFolder}/backend/server.js",
+      "cwd": "${workspaceFolder}/backend",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "Run Frontend React App",
+      "type": "pwa-node",
+      "request": "launch",
+      "command": "npm",
+      "args": ["start"],
+      "cwd": "${workspaceFolder}/frontend",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "Launch Chrome Frontend",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/frontend/src"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Full Project (Backend + Frontend + Chrome)",
+      "configurations": [
+        "Run Backend Server",
+        "Run Frontend React App",
+        "Launch Chrome Frontend"
+      ]
+    }
+  ]
+}

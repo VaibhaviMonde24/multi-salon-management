@@ -1,0 +1,59 @@
+/* ---------------------------- */
+/* Owner Appointments Styles    */
+/* ---------------------------- */
+.owner-appointments {
+  padding: 40px;
+  font-family: 'Arial', sans-serif;
+  background: #f0f0f0;
+  min-height: 100vh;
+}
+
+.owner-appointments h1 {
+  color: #00796b;
+  margin-bottom: 30px;
+  font-size: 32px;
+}
+
+/* Table Styles */
+.owner-appointments table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(38, 166, 154, 0.2);
+}
+
+.owner-appointments th,
+.owner-appointments td {
+  padding: 15px;
+  text-align: left;
+}
+
+.owner-appointments th {
+  background: #26a69a;
+  color: #fff;
+  font-weight: bold;
+}
+
+.owner-appointments tr:nth-child(even) {
+  background: #e0f2f1;
+}
+
+.owner-appointments tr:hover {
+  background: #b2dfdb;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .owner-appointments {
+    padding: 20px;
+  }
+
+  .owner-appointments table,
+  .owner-appointments th,
+  .owner-appointments td {
+    font-size: 14px;
+  }
+}

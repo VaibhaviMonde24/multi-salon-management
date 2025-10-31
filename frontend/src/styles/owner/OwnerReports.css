@@ -1,0 +1,22 @@
+/* File: src/styles/owner/OwnerReports.css */
+.owner-reports {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.owner-reports h2 {
+  margin-bottom: 20px;
+}
+
+.chart {
+  margin-bottom: 40px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.chart h3 {
+  margin-bottom: 15px;
+  color: #333;
+}

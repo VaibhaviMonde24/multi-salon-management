@@ -1,0 +1,40 @@
+.owner-payments {
+  padding: 30px;
+  font-family: 'Arial', sans-serif;
+  background: #f0f0f0;
+  min-height: 100vh;
+}
+
+.owner-payments h1 {
+  color: #00796b;
+  margin-bottom: 20px;
+}
+
+.payments-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.payments-table th, .payments-table td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+.payments-table th {
+  background: #26a69a;
+  color: white;
+  font-weight: 600;
+}
+
+.payments-table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+.payments-table tr:hover {
+  background: #e0f2f1;
+  transition: 0.3s;
+}

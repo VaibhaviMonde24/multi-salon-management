@@ -1,0 +1,112 @@
+/* Notifications page container */
+.notifications-container {
+  width: 100%;
+  max-width: 750px;
+  margin: 50px auto;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.9); /* semi-transparent for background image */
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  backdrop-filter: blur(5px);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Heading */
+.notifications-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 2rem;
+  color: #c0392b;
+  letter-spacing: 0.5px;
+}
+
+/* Notifications list */
+.notifications-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Each notification item */
+.notifications-container li {
+  background: #ffffff;
+  margin: 12px 0;
+  padding: 20px;
+  border-left: 5px solid #3498db; /* default accent color */
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Unread vs Read */
+.notifications-container li.unread {
+  border-left-color: #e74c3c;
+  background: #fff4f4;
+}
+
+.notifications-container li.read {
+  border-left-color: #2ecc71;
+  background: #f9fff9;
+}
+
+/* Hover effect */
+.notifications-container li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* Notification content */
+.notifications-container li strong {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  color: #2c3e50;
+}
+
+.notifications-container li p {
+  font-size: 0.95rem;
+  color: #34495e;
+  margin: 5px 0;
+}
+
+.notifications-container li small {
+  color: #7f8c8d;
+  font-size: 0.8rem;
+}
+
+/* Mark as read button */
+.notifications-container li button {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  padding: 6px 12px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.3s ease;
+}
+
+.notifications-container li button:hover {
+  background-color: #2980b9;
+}
+
+/* Responsive for mobile */
+@media (max-width: 768px) {
+  .notifications-container {
+    padding: 20px;
+    margin: 30px 15px;
+  }
+
+  .notifications-container li {
+    padding: 15px;
+  }
+
+  .notifications-container li button {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+}

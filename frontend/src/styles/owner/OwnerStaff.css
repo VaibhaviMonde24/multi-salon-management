@@ -1,0 +1,127 @@
+/* File: src/styles/owner/OwnerStaff.css */
+
+.owner-staff-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: #fafafa;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.owner-staff-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.staff-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.staff-form input {
+  padding: 10px;
+  flex: 1 1 200px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border 0.2s;
+}
+
+.staff-form input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.staff-form button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.staff-form button:hover {
+  background-color: #0056b3;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+table button {
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+table button.edit-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+table button.edit-btn:hover {
+  background-color: #1e7e34;
+}
+
+table button.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+table button.delete-btn:hover {
+  background-color: #a71d2a;
+}
+.staff-form select {
+  padding: 10px;
+  flex: 1 1 200px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border 0.2s;
+  background-color: #fff;
+}
+
+.staff-form select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  .staff-form {
+    flex-direction: column;
+  }
+
+  .staff-form input,
+  .staff-form button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,104 @@
+:root {
+  --primary-color: #d500f9;
+  --primary-hover: #aa00ff;
+  --accent-color: #880e4f;
+  --form-bg: rgba(255, 255, 255, 0.9);
+}
+
+/* Container */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* Form Card */
+.auth-form {
+  background-color: var(--form-bg);
+  padding: 2.5rem 3rem;
+  border-radius: 20px;
+  width: 420px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 25px rgba(136, 14, 79, 0.3);
+  display: flex;
+  flex-direction: column;
+  text-align: left; /* keep labels aligned */
+}
+
+/* Heading */
+.auth-form h2 {
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--accent-color);
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+/* Labels */
+.auth-form label {
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+/* Inputs & Selects */
+.auth-form input,
+.auth-form select,
+.auth-form textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--primary-color);
+  border-radius: 50px;
+  font-size: 1rem;
+  outline: none;
+  margin-bottom: 1.2rem;
+  transition: border-color 0.2s, box-shadow 0.3s ease;
+  background-color: #fff;
+}
+
+.auth-form textarea {
+  border-radius: 15px;
+  resize: vertical;
+  min-height: 90px;
+  padding: 1rem;
+}
+
+.auth-form input:focus,
+.auth-form select:focus,
+.auth-form textarea:focus {
+  border-color: var(--primary-hover);
+  box-shadow: 0 0 8px var(--primary-hover);
+}
+
+/* Submit Button */
+.auth-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 50px;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.auth-btn:hover {
+  background-color: var(--primary-hover);
+  transform: scale(1.02);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .auth-form {
+    width: 95%;
+    padding: 2rem;
+  }
+}

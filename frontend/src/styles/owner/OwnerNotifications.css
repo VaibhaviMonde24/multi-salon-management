@@ -1,0 +1,72 @@
+
+
+
+
+/* Notifications list */
+.notifications-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.notifications-list li {
+  background-color: #fff;
+  padding: 18px 20px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.notifications-list li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.notifications-list li.unread {
+  border-left: 4px solid #2563eb;
+  font-weight: 600;
+}
+
+.notifications-list li span {
+  flex: 1;
+  padding-right: 10px;
+}
+
+/* Actions buttons */
+.notifications-list .actions {
+  display: flex;
+  gap: 10px;
+}
+
+.notifications-list button {
+  background-color: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.notifications-list button:hover {
+  background-color: #1d4ed8;
+}
+
+.notifications-list button:last-child {
+  background-color: #ef4444;
+}
+
+.notifications-list button:last-child:hover {
+  background-color: #dc2626;
+}
+
+/* Empty notifications message */
+.main-content p {
+  font-size: 1rem;
+  color: #6b7280;
+}
