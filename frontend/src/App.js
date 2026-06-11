@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import ServiceSalons from "./pages/ServiceSalons"; // ← नवीन ADD
 
 // Customer pages
 import CustomerDashboard from "./pages/customer/CustomerDashboard";
@@ -39,8 +40,9 @@ import AdminReviews from "./pages/admin/AdminReviews";
 import AdminPayments from "./pages/admin/AdminPayments";
 import AdminNotifications from "./pages/admin/AdminNotifications";
 import AdminContact from "./pages/admin/AdminContact";
-// Optional: 404 page
-import NotFound from "./pages/NotFound"; // create this if you like
+
+import NotFound from "./pages/NotFound";
+
 function App() {
   return (
     <Router>
@@ -51,14 +53,15 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-         <Route path="/reset-password/:token" element={<ResetPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
+        <Route path="/salons/service/:serviceId" element={<ServiceSalons />} /> {/* ← नवीन ADD */}
 
         {/* Customer routes */}
         <Route path="/customer/dashboard" element={<CustomerDashboard />} />
         <Route path="/customer/appointments" element={<Appointments />} />
         <Route path="/customer/book-appointment" element={<BookAppointment />} />
         <Route path="/customer/notifications" element={<Notifications />} />
-        <Route path="/customer/payments" element={<Payments/>}/>
+        <Route path="/customer/payments" element={<Payments />} />
         <Route path="/customer/reviews" element={<Reviews />} />
         <Route path="/customer/profile" element={<Profile />} />
 
@@ -75,7 +78,7 @@ function App() {
         <Route path="/owner/notifications" element={<OwnerNotifications />} />
         <Route path="/owner/reports" element={<OwnerReports />} />
 
-         {/* Admin routes */}
+        {/* Admin routes */}
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/users" element={<AdminUsers />} />
         <Route path="/admin/salons" element={<AdminSalons />} />

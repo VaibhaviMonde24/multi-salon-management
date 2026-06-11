@@ -15,6 +15,8 @@ import {
 } from "react-icons/fa";
 import "../styles/Home.css";
 
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 function Home() {
   const navigate = useNavigate();
 
@@ -22,9 +24,13 @@ function Home() {
   const [salons, setSalons] = useState([]);
   const [selectedService, setSelectedService] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [loadingServices, setLoadingServices] = useState(true);
+  const [loadingSalons, setLoadingSalons] = useState(true);
+  const [error, setError] = useState(null);
 
   const serviceIcons = {
     haircut: <FaCut />,
+    "hair cut": <FaCut />,
     spa: <FaSpa />,
     manicure: <FaHandSparkles />,
     pedicure: <FaHandSparkles />,
@@ -36,38 +42,42 @@ function Home() {
 
   const getServiceIcon = (serviceName) => {
     if (!serviceName) return <FaCut />;
-    const key = serviceName.toLowerCase().replace(/\s+/g, "");
+    const key = serviceName.toLowerCase().trim();
     return serviceIcons[key] || <FaCut />;
   };
 
-  // Fetch services
   useEffect(() => {
-    fetch("http://localhost:5000/api/services")
+    // Fetch services
+    fetch(`${API_URL}/api/services`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) setServices(data.data);
       })
-      .catch((err) => console.error("Error fetching services:", err));
-  }, []);
+      .catch((err) => {
+        console.error("Error fetching services:", err);
+        setError("Failed to load services.");
+      })
+      .finally(() => setLoadingServices(false));
 
-  // Fetch salons
-  useEffect(() => {
-    fetch("http://localhost:5000/api/salons/all")
+    // Fetch salons
+    fetch(`${API_URL}/api/salons/all`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) setSalons(data.salons);
       })
-      .catch((err) => console.error("Error fetching salons:", err));
+      .catch((err) => {
+        console.error("Error fetching salons:", err);
+        setError("Failed to load salons.");
+      })
+      .finally(() => setLoadingSalons(false));
   }, []);
 
-  const handleServiceClick = (serviceId) => {
+  // ✅ Service card click → नवीन page वर navigate
+  const handleServiceClick = (serviceId, serviceName) => {
     setSelectedService(serviceId);
-    fetch(`http://localhost:5000/api/salons/by-service/${serviceId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) setSalons(data.salons);
-      })
-      .catch((err) => console.error(err));
+    navigate(`/salons/service/${serviceId}`, {
+      state: { serviceName },
+    });
   };
 
   const filteredSalons = salons.filter(
@@ -77,20 +87,31 @@ function Home() {
   );
 
   const handleSearch = () => {
-    fetch(`http://localhost:5000/api/salons/search?query=${searchQuery}`)
+    if (!searchQuery.trim()) return;
+    setLoadingSalons(true);
+    fetch(`${API_URL}/api/salons/search?query=${encodeURIComponent(searchQuery)}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) setSalons(data.salons);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
+      .finally(() => setLoadingSalons(false));
   };
 
   const handleBookNow = (salonId) => {
+    localStorage.setItem("redirectSalonId", salonId);
     navigate("/login");
+  };
+
+  const renderStars = (rating = 0) => {
+    return Array.from({ length: 5 }, (_, i) => (
+      <FaStar key={i} color={i < Math.round(rating) ? "#ff4081" : "#ccc"} />
+    ));
   };
 
   return (
     <div className="home-container">
+
       {/* Navbar */}
       <nav className="navbar">
         <div className="logo">SalonHub</div>
@@ -123,48 +144,69 @@ function Home() {
         </div>
       </section>
 
+      {error && (
+        <div className="error-banner">⚠️ {error} Please refresh the page.</div>
+      )}
+
       {/* Services Section */}
       <section className="services" id="services">
         <h2>Our Services</h2>
         <div className="services-list">
-          {services.length > 0 ? services.map((service) => (
-            <div
-              key={service.service_id}
-              className={`service-card ${selectedService === service.service_id ? "selected" : ""}`}
-              onClick={() => handleServiceClick(service.service_id)}
-            >
-              <div className="service-icon">{getServiceIcon(service.service_name)}</div>
-              <span>{service.service_name}</span>
-            </div>
-          )) : <p>Loading services...</p>}
+          {loadingServices ? (
+            <p>Loading services...</p>
+          ) : services.length > 0 ? (
+            services.map((service) => (
+              <div
+                key={service.service_id}
+                className={`service-card ${selectedService === service.service_id ? "selected" : ""}`}
+                onClick={() => handleServiceClick(service.service_id, service.service_name)}
+                style={{ cursor: "pointer" }}
+              >
+                <div className="service-icon">{getServiceIcon(service.service_name)}</div>
+                <span>{service.service_name}</span>
+              </div>
+            ))
+          ) : (
+            <p>No services available.</p>
+          )}
         </div>
       </section>
 
-      {/* Featured Salons */}
+      {/* Salons Section */}
       <section className="salon-section" id="salons">
         <h2>Salons</h2>
         <div className="salon-list">
-          {filteredSalons.length > 0 ? filteredSalons.map((salon) => (
-            <div key={salon.salon_id} className="salon-card">
-              <div className="salon-image-container">
-                <img
-                  src={salon.salon_logo || "https://source.unsplash.com/300x200/?salon,beauty"}
-                  alt={salon.salon_name}
-                />
+          {loadingSalons ? (
+            <p>Loading salons...</p>
+          ) : filteredSalons.length > 0 ? (
+            filteredSalons.map((salon) => (
+              <div key={salon.salon_id} className="salon-card">
+                <div className="salon-image-container">
+                  <img
+                    src={salon.salon_logo || "/images/default-salon.jpg"}
+                    alt={salon.salon_name}
+                    onError={(e) => { e.target.src = "/images/default-salon.jpg"; }}
+                  />
+                </div>
+                <div className="salon-info">
+                  <h3>{salon.salon_name}</h3>
+                  <p><FaMapMarkerAlt /> {salon.salon_address}</p>
+                  <p><FaPhoneAlt /> {salon.salon_phone_number}</p>
+                  <p className="rating">
+                    {renderStars(salon.rating)}
+                    <span style={{ marginLeft: "6px", fontSize: "13px", color: "#666" }}>
+                      {salon.rating ? `(${salon.rating})` : "No ratings yet"}
+                    </span>
+                  </p>
+                  <button className="book-btn" onClick={() => handleBookNow(salon.salon_id)}>
+                    Book Now
+                  </button>
+                </div>
               </div>
-              <div className="salon-info">
-                <h3>{salon.salon_name}</h3>
-                <p><FaMapMarkerAlt /> {salon.salon_address}</p>
-                <p><FaPhoneAlt /> {salon.salon_phone_number}</p>
-                <p className="rating">
-                  {Array.from({ length: 5 }, (_, i) => (
-                    <FaStar key={i} color={i < 4 ? "#ff4081" : "#ccc"} />
-                  ))}
-                </p>
-                <button className="book-btn" onClick={() => handleBookNow(salon.salon_id)}>Book Now</button>
-              </div>
-            </div>
-          )) : <p>No salons found.</p>}
+            ))
+          ) : (
+            <p>No salons found. Try a different search.</p>
+          )}
         </div>
       </section>
 
@@ -181,12 +223,13 @@ function Home() {
       {/* Footer */}
       <footer className="footer">
         <div className="social-icons">
-          <FaFacebook />
-          <FaInstagram />
-          <FaTwitter />
+          <a href="https://facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook"><FaFacebook /></a>
+          <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram"><FaInstagram /></a>
+          <a href="https://twitter.com" target="_blank" rel="noreferrer" aria-label="Twitter"><FaTwitter /></a>
         </div>
-        <p>© 2025 SalonHub. All rights reserved.</p>
+        <p>© 2026 SalonHub. All rights reserved.</p>
       </footer>
+
     </div>
   );
 }

@@ -1,9 +1,15 @@
 const db = require("../db");
 // Get all services (public)
+
 exports.getAllServices = async (req, res) => {
   try {
     const [services] = await db.promise().query(
-      "SELECT service_id, service_name FROM service WHERE is_deleted = 0 ORDER BY created_at DESC"
+      `SELECT MIN(service_id) as service_id, 
+              TRIM(service_name) as service_name 
+       FROM service 
+       WHERE is_deleted = 0 
+       GROUP BY LOWER(TRIM(service_name))
+       ORDER BY service_name ASC`
     );
     res.status(200).json({ success: true, data: services });
   } catch (err) {

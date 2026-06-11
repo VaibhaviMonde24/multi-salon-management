@@ -448,3 +448,49 @@ exports.searchSalons = async (req, res) => {
     res.status(500).json({ success: false, message: "Database error" });
   }
 };
+// -------------------------
+// Get salons by service name (Public)
+// -------------------------
+exports.getSalonsByService = async (req, res) => {
+  const serviceId = Number(req.params.serviceId);
+
+  if (!serviceId) {
+    return res.status(400).json({ success: false, message: "Invalid service ID" });
+  }
+
+  try {
+    // पहिले service_name काढ त्या serviceId वरून
+    const [[service]] = await db.promise().query(
+      `SELECT service_name FROM service WHERE service_id = ? AND is_deleted = 0`,
+      [serviceId]
+    );
+
+    if (!service) {
+      return res.status(404).json({ success: false, message: "Service not found" });
+    }
+
+    // मग त्याच नावाची service असलेले सगळे approved salons आण
+    const [salons] = await db.promise().query(
+      `SELECT DISTINCT s.salon_id, s.salon_name, s.salon_address, 
+              s.salon_phone_number, s.salon_logo, s.city, s.category
+       FROM salon s
+       INNER JOIN service sv ON s.salon_id = sv.salon_id
+       WHERE LOWER(TRIM(sv.service_name)) = LOWER(TRIM(?))
+         AND s.status = 'approved'
+         AND s.is_deleted = 0
+         AND sv.is_deleted = 0`,
+      [service.service_name]
+    );
+
+    res.status(200).json({
+      success: true,
+      service_name: service.service_name,
+      count: salons.length,
+      salons: salons
+    });
+
+  } catch (err) {
+    console.error("GetSalonsByService Error:", err);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};

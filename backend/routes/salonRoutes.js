@@ -8,6 +8,7 @@ const salonController = require("../controllers/salonController");
 // ----------------------
 router.get("/all", salonController.getAllSalons);
 router.get("/search", salonController.searchSalons); // <-- public search
+router.get("/by-service/:serviceId", salonController.getSalonsByService);
 
 // ----------------------
 // Owner-only routes (authenticated)
