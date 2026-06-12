@@ -7,7 +7,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
-import ServiceSalons from "./pages/ServiceSalons"; // ← नवीन ADD
+import ServiceSalons from "./pages/ServiceSalons"; 
+import SalonDetails from "./pages/SalonDetails";
 
 // Customer pages
 import CustomerDashboard from "./pages/customer/CustomerDashboard";
@@ -54,7 +55,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
-        <Route path="/salons/service/:serviceId" element={<ServiceSalons />} /> {/* ← नवीन ADD */}
+        <Route path="/salons/service/:serviceId" element={<ServiceSalons />} /> 
+        <Route path="/salon/:salon_id" element={<SalonDetails />} />
 
         {/* Customer routes */}
         <Route path="/customer/dashboard" element={<CustomerDashboard />} />

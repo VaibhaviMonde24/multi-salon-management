@@ -459,7 +459,7 @@ exports.getSalonsByService = async (req, res) => {
   }
 
   try {
-    // पहिले service_name काढ त्या serviceId वरून
+    
     const [[service]] = await db.promise().query(
       `SELECT service_name FROM service WHERE service_id = ? AND is_deleted = 0`,
       [serviceId]
@@ -469,7 +469,7 @@ exports.getSalonsByService = async (req, res) => {
       return res.status(404).json({ success: false, message: "Service not found" });
     }
 
-    // मग त्याच नावाची service असलेले सगळे approved salons आण
+  
     const [salons] = await db.promise().query(
       `SELECT DISTINCT s.salon_id, s.salon_name, s.salon_address, 
               s.salon_phone_number, s.salon_logo, s.city, s.category
@@ -492,5 +492,56 @@ exports.getSalonsByService = async (req, res) => {
   } catch (err) {
     console.error("GetSalonsByService Error:", err);
     res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};
+// -------------------------
+// Get salon details (Public)
+// -------------------------
+exports.getPublicSalonById = async (req, res) => {
+  const salon_id = Number(req.params.salon_id);
+
+  if (!salon_id) {
+    return res.status(400).json({
+      success: false,
+      message: "Invalid salon ID",
+    });
+  }
+
+  try {
+    const [rows] = await db.promise().query(
+      `SELECT salon_id,
+              salon_name,
+              salon_address,
+              salon_phone_number,
+              salon_email,
+              salon_description,
+              salon_logo,
+              city,
+              category
+       FROM salon
+       WHERE salon_id = ?
+         AND status = 'approved'
+         AND is_deleted = 0`,
+      [salon_id]
+    );
+
+    if (!rows.length) {
+      return res.status(404).json({
+        success: false,
+        message: "Salon not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: rows[0],
+    });
+  } catch (err) {
+    console.error("GetPublicSalonById Error:", err);
+
+    res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
   }
 };
