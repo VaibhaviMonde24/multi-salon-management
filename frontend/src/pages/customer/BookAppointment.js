@@ -194,7 +194,7 @@ function BookAppointment() {
           <option value="">Select Service</option>
           {services.map((s) => (
             <option key={s.service_id} value={s.service_id}>
-              {s.service_name} (${s.service_price})
+              {s.service_name} (₹{parseInt(s.service_price)})
             </option>
           ))}
         </select>

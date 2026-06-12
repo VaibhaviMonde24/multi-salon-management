@@ -66,32 +66,6 @@ exports.bookAppointment = async (req, res) => {
 };
 
 // -------------------------
-// Get my appointments
-// -------------------------
-exports.getMyAppointments = async (req, res) => {
-  const customerId = req.user.user_id;
-  try {
-    const [appointments] = await db.promise().query(
-      `SELECT a.appointment_id, a.appointment_datetime, a.status, a.notes,
-              s.service_name, st.name AS staff_name, b.branch_name, sl.salon_name
-       FROM appointment a
-       LEFT JOIN service s ON a.service_id = s.service_id
-       LEFT JOIN staff st ON a.staff_id = st.staff_id AND st.is_deleted = 0
-       LEFT JOIN branch b ON a.branch_id = b.branch_id
-       LEFT JOIN salon sl ON a.salon_id = sl.salon_id
-       WHERE a.customer_id = ? AND a.is_deleted = 0
-       ORDER BY a.appointment_datetime DESC`,
-      [customerId]
-    );
-
-    res.status(200).json({ success: true, data: appointments });
-  } catch (err) {
-    console.error("Get My Appointments Error:", err);
-    res.status(500).json({ success: false, message: "Internal server error" });
-  }
-};
-
-// -------------------------
 // Cancel appointment
 // -------------------------
 exports.cancelAppointment = async (req, res) => {
