@@ -3,25 +3,32 @@ import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../styles/Login.css";
 
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 function Login() {
   const navigate = useNavigate();
-  const [identifier, setIdentifier] = useState(""); // email or phone
+  const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
 
     const trimmedIdentifier = identifier.trim();
     const trimmedPassword = password.trim();
 
     if (!trimmedIdentifier || !trimmedPassword) {
-      alert("Email or phone and password are required.");
+      setError("Email or phone and password are required.");
       return;
     }
 
+    setLoading(true);
+
     try {
-      const response = await fetch("http://localhost:5000/api/users/login", {
+      const response = await fetch(`${API_URL}/api/users/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ identifier: trimmedIdentifier, password: trimmedPassword }),
@@ -30,14 +37,21 @@ function Login() {
       const data = await response.json();
 
       if (!data.success) {
-        alert(data.message || "Something went wrong during login.");
+        setError(data.message || "Something went wrong during login.");
         return;
       }
 
+      // ✅ Token save करा
       localStorage.setItem("token", data.token);
 
-      // Redirect based on role
-      if (data.user.role === "Customer") {
+      // ✅ redirectSalonId check करा
+      const redirectSalonId = localStorage.getItem("redirectSalonId");
+
+      if (data.user.role === "Customer" && redirectSalonId) {
+        // Salon वरून आलेला Customer → Book Appointment वर पाठव
+        localStorage.removeItem("redirectSalonId");
+        navigate(`/customer/book-appointment?salon_id=${redirectSalonId}`);
+      } else if (data.user.role === "Customer") {
         navigate("/customer/dashboard");
       } else if (data.user.role === "SalonOwner") {
         navigate("/owner/dashboard");
@@ -46,9 +60,12 @@ function Login() {
       } else {
         navigate("/");
       }
+
     } catch (error) {
       console.error("Login Error:", error);
-      alert("Something went wrong during login.");
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -65,6 +82,21 @@ function Login() {
     >
       <form className="auth-form" onSubmit={handleSubmit}>
         <h2>Login</h2>
+
+        {/* ✅ Error Message */}
+        {error && (
+          <div style={{
+            padding: "10px 14px",
+            borderRadius: "8px",
+            marginBottom: "14px",
+            backgroundColor: "#fdecea",
+            color: "#c62828",
+            fontWeight: "500",
+            fontSize: "14px",
+          }}>
+            ⚠️ {error}
+          </div>
+        )}
 
         <label>Email or Phone</label>
         <input
@@ -99,16 +131,18 @@ function Login() {
           </button>
         </div>
 
-        <button type="submit" className="auth-btn">Login</button>
+        {/* ✅ Loading state */}
+        <button type="submit" className="auth-btn" disabled={loading}>
+          {loading ? "Logging in..." : "Login"}
+        </button>
 
         <p>
-          Don’t have an account?{" "}
+          Don't have an account?{" "}
           <span className="link" onClick={() => navigate("/register")}>
             Register
           </span>
         </p>
 
-        {/* NEW Back to Home Button */}
         <p style={{ marginTop: "15px", textAlign: "center" }}>
           <span
             className="link"

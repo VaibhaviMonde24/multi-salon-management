@@ -23,6 +23,37 @@ exports.getStaff = async (req, res) => {
 };
 
 // -------------------------
+// ✅ Get Staff by Salon ID (Public — customer साठी)
+// -------------------------
+exports.getStaffBySalon = async (req, res) => {
+  const salon_id = Number(req.params.salon_id);
+
+  if (!salon_id) {
+    return res.status(400).json({ success: false, message: 'Invalid salon ID' });
+  }
+
+  try {
+    const [staff] = await db.promise().query(
+      `SELECT staff_id, 
+              name AS staff_name, 
+              staff_role, 
+              staff_status
+       FROM staff
+       WHERE salon_id = ? 
+         AND is_deleted = 0 
+         AND staff_status = 'Active'
+       ORDER BY name ASC`,
+      [salon_id]
+    );
+
+    res.status(200).json({ success: true, data: staff });
+  } catch (err) {
+    console.error('GetStaffBySalon Error:', err);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+};
+
+// -------------------------
 // Add Staff
 // -------------------------
 exports.addStaff = async (req, res) => {
@@ -34,7 +65,6 @@ exports.addStaff = async (req, res) => {
   }
 
   try {
-    // Verify salon ownership
     const [salon] = await db.promise().query(
       `SELECT salon_id FROM salon WHERE salon_id=? AND user_id=? AND is_deleted=0`,
       [salon_id, ownerId]
@@ -43,7 +73,6 @@ exports.addStaff = async (req, res) => {
       return res.status(403).json({ success: false, message: 'Unauthorized to add staff to this salon.' });
     }
 
-    // Default branch_id to main branch if not provided
     if (!branch_id) {
       const [mainBranch] = await db.promise().query(
         `SELECT branch_id FROM branch WHERE salon_id=? AND is_deleted=0 ORDER BY is_main DESC LIMIT 1`,
@@ -88,7 +117,6 @@ exports.updateStaff = async (req, res) => {
       return res.status(404).json({ success: false, message: 'Staff not found or unauthorized' });
     }
 
-    // Default branch_id to main branch if not provided
     if (!branch_id) {
       const [mainBranch] = await db.promise().query(
         `SELECT branch_id FROM branch WHERE salon_id=? AND is_deleted=0 ORDER BY is_main DESC LIMIT 1`,

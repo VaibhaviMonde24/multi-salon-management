@@ -1,14 +1,9 @@
-// File: routes/staffRoutes.js
 const express = require('express');
 const router = express.Router();
 const { body, param, validationResult } = require('express-validator');
 const authenticateToken = require('../middleware/authMiddleware');
 const staffController = require('../controllers/staffController');
 
-// Apply authentication middleware to all routes
-router.use(authenticateToken);
-
-// Middleware to handle validation results
 const validate = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -17,16 +12,14 @@ const validate = (req, res, next) => {
   next();
 };
 
-// ----------------------
-// GET all staff for owner
-// GET /api/staff
-// ----------------------
+// ✅ Public route — customer साठी (auth नाही लागत)
+router.get('/salon/:salon_id', staffController.getStaffBySalon);
+
+// Owner routes — auth लागतो
+router.use(authenticateToken);
+
 router.get('/', staffController.getStaff);
 
-// ----------------------
-// Add new staff
-// POST /api/staff
-// ----------------------
 router.post(
   '/',
   [
@@ -41,10 +34,6 @@ router.post(
   staffController.addStaff
 );
 
-// ----------------------
-// Update existing staff
-// PUT /api/staff/:staff_id
-// ----------------------
 router.put(
   '/:staff_id',
   [
@@ -61,10 +50,6 @@ router.put(
   staffController.updateStaff
 );
 
-// ----------------------
-// Delete staff (soft delete)
-// DELETE /api/staff/:staff_id
-// ----------------------
 router.delete(
   '/:staff_id',
   [
