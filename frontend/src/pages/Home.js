@@ -171,10 +171,10 @@ function Home() {
           )}
         </div>
       </section>
-
       {/* Salons Section */}
       <section className="salon-section" id="salons">
         <h2>Salons</h2>
+
         <div className="salon-list">
           {loadingSalons ? (
             <p>Loading salons...</p>
@@ -185,22 +185,68 @@ function Home() {
                   <img
                     src={salon.salon_logo || "/images/default-salon.jpg"}
                     alt={salon.salon_name}
-                    onError={(e) => { e.target.src = "/images/default-salon.jpg"; }}
+                    onError={(e) => {
+                      e.target.src = "/images/default-salon.jpg";
+                    }}
                   />
                 </div>
+
                 <div className="salon-info">
                   <h3>{salon.salon_name}</h3>
-                  <p><FaMapMarkerAlt /> {salon.salon_address}</p>
-                  <p><FaPhoneAlt /> {salon.salon_phone_number}</p>
+
+                  <p>
+                    <FaMapMarkerAlt /> {salon.salon_address}
+                  </p>
+
+                  <p>
+                    <FaPhoneAlt /> {salon.salon_phone_number}
+                  </p>
+
                   <p className="rating">
                     {renderStars(salon.rating)}
-                    <span style={{ marginLeft: "6px", fontSize: "13px", color: "#666" }}>
-                      {salon.rating ? `(${salon.rating})` : "No ratings yet"}
+
+                    <span
+                      style={{
+                        marginLeft: "6px",
+                        fontSize: "13px",
+                        color: "#666",
+                      }}
+                    >
+                      {salon.rating
+                        ? `(${salon.rating})`
+                        : "No ratings yet"}
                     </span>
                   </p>
-                  <button className="book-btn" onClick={() => handleBookNow(salon.salon_id)}>
-                    Book Now
-                  </button>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: "10px",
+                      marginTop: "10px",
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    <button
+                      className="book-btn"
+                      onClick={() =>
+                        handleBookNow(salon.salon_id)
+                      }
+                    >
+                      Book Now
+                    </button>
+
+                    <button
+                      className="book-btn"
+                      style={{
+                        backgroundColor: "#555",
+                      }}
+                      onClick={() =>
+                        navigate(`/salon/${salon.salon_id}`)
+                      }
+                    >
+                      View Details
+                    </button>
+                  </div>
                 </div>
               </div>
             ))
